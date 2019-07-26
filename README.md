@@ -4,19 +4,26 @@ URL based meta data mapper.
 
 ## Features
 
-### Routing (TBD)
+### Routing
 
 ```php
-$mapper = new MetaMapper();
-$mapper->map(['/foo', '/bar'])->provide(funciton() {
-    return [
-        'title' => 'foo bar page',
-    ];
-});
+$mapper = new Mapper();
+$mapper->map(['/foo', '/bar'])->provide([
+    'title' => 'foo bar page',
+]);
+$mapper->map(['/hoge', '/fuga'])->provide([
+    'title' => 'hoge fuga page',
+]);
 $meta = $mapper->resolve('https://example.com/foo');
+/*
+ * $meta is ...
+ * [
+ *   'title' => 'hoge fuga page'
+ * ]
+ */
 ```
 
-### Route parameters, Query Strings
+### Route parameters, Query Strings (TBD)
 
 ```php
 $mapper = new MetaMapper();
@@ -36,7 +43,7 @@ $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 
 * Regular Expression Constraints
 
-### Binding Data
+### Binding Data (TBD)
 
 ```php
 $mapper = new MetaMapper();
@@ -51,7 +58,7 @@ $mapper->map('/foo/{id}')->pre(function($route, $query, $binding) {
 $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 ```
 
-### Hooks
+### Hooks (TBD)
 
 ```php
 $mapper->global()->pre(function($route, $query, $binding) {
@@ -60,13 +67,11 @@ $mapper->global()->pre(function($route, $query, $binding) {
 });
 ```
 
-### ネストしつつ差分を当てていく仕組み
-
 ### Aliases
 
-### Generate Admin Page
+### Generate Admin Page (TBD)
 
-### Reuse Template
+### Reuse Template (TBD)
 
 ```php
 $mapper = new MetaMapper();
@@ -77,7 +82,7 @@ $mapper->map('/bar')->provide(M::template('temp-name'));
 $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 ```
 
-### define templates
+### define templates (TBD)
 
 ```php
 $templates = [
