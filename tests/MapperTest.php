@@ -1,6 +1,4 @@
 <?php
-namespace MetaMapper;
-
 use PHPUnit\Framework\TestCase;
 
 final class MapperTest extends TestCase

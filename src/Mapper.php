@@ -1,22 +1,24 @@
 <?php
 
-namespace MetaMapper;
-
 class Mapper {
+    /**
+     * @var MappingRule[]
+     */
     private $rules = [];
+
+    /**
+     * @var MappingRule
+     */
     private $currentRule = null;
 
     public function map($paths) {
-        array_push($this->rules, [
-            'paths' => $paths,
-            'template' => null,
-        ]);
+        array_push($this->rules, new MappingRule($paths));
         $this->currentRule = &$this->rules[count($this->rules) - 1];
         return $this;
     }
 
-    public function provide($template) {
-        $this->currentRule['template'] = $template;
+    public function provide(array $template) {
+        $this->currentRule->setTemplate($template);
         return $this;
     }
 
@@ -24,10 +26,8 @@ class Mapper {
         $urlInfo = parse_url($url);
 
         foreach ($this->rules as $rule) {
-            foreach ($rule['paths'] as $path) {
-                if ($urlInfo['path'] === $path) {
-                    return $rule['template'];
-                }
+            if (($template = $rule->resolve($urlInfo['path'])) !== null) {
+                return $template;
             }
         }
 
