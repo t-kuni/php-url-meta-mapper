@@ -5,7 +5,7 @@
       <tool tool_name="PHPUnit">
         <cache>
           <versions>
-            <info id="interpreter-4683b012-51e9-4ff1-a73b-90839e0f5756" version="8.2.5" />
+            <info id="interpreter-0c1bdd5f-3a5c-446f-82af-0ca5db2f883f" version="8.2.5" />
           </versions>
         </cache>
       </tool>
