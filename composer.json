@@ -1,0 +1,13 @@
+{
+    "name": "tigmium/meta-mapper",
+    "type": "library",
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8"
+    }
+}
