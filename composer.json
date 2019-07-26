@@ -1,6 +1,7 @@
 {
     "name": "tigmium/meta-mapper",
     "type": "library",
+    "psr-4": { "MetaMapper\\": "src/" },
     "autoload": {
         "classmap": [
             "src/"
