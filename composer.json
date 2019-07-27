@@ -1,11 +1,11 @@
 {
-  "name": "tigmium/php-url-meta-mapper",
+  "name": "t-kuni/php-url-meta-mapper",
   "description": "URL based Meta data mapper.",
   "version": "0.0.2",
   "type": "library",
   "autoload": {
     "psr-4": {
-      "Tigmium\\PhpUrlMetaMapper\\": "src/"
+      "TKuni\\PhpUrlMetaMapper\\": "src/"
     },
     "classmap": [
       "src/"
