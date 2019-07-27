@@ -1,19 +1,21 @@
 {
-    "name": "tigmium/php-url-meta-mapper",
-    "description": "URL based Meta data mapper.",
-    "version": "0.0.1",
-    "type": "library",
-    "psr-4": { "Tigmium\\PhpUrlMetaMapper\\": "src/" },
-    "autoload": {
-        "classmap": [
-            "src/"
-        ]
+  "name": "tigmium/php-url-meta-mapper",
+  "description": "URL based Meta data mapper.",
+  "version": "0.0.2",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Tigmium\\PhpUrlMetaMapper\\": "src/"
     },
-    "license": "MIT",
-    "require": {
-        "php": "^7.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8"
-    }
-}
+    "classmap": [
+      "src/"
+    ]
+  },
+  "license": "MIT",
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  }
+},
