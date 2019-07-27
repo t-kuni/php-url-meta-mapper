@@ -2,7 +2,7 @@
 
 This library is URL based meta data mapper.  
 Purpose of this is to collect various places SEO text settings into one place.  
-This is useful in web page like to often occur modification for SEO.  
+This is useful in web page like to often occur modification of meta tag.  
 You can define mapping simply between URL and Meta data through the fluent interface.  
 
 ## Features
