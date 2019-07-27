@@ -27,8 +27,7 @@ class MappingRule
 
     public function resolve(string $path) {
         foreach ($this->paths as $rulePath) {
-            if ($rulePath->match($path)) {
-                $route = [];
+            if (($route = $rulePath->match($path)) !== null) {
                 return new Resolved($this->template, $route);
             }
         }

@@ -6,21 +6,20 @@ class Path
      * @var string
      */
     private $path;
-
     /**
-     * @var string
+     * @var PathMatcher
      */
-    private $regexp;
+    private $matcher;
 
 
-    public function __construct(string $path)
+    public function __construct(string $pathPattern)
     {
-        $this->path   = $path;
-        $this->regexp = (new PathParser())->parse($path);
+        $this->path   = $pathPattern;
+        $this->matcher = new PathMatcher($pathPattern);
     }
 
     public function match($path)
     {
-        return preg_match($this->regexp, $path);
+        return $this->matcher->match($path);
     }
 }
