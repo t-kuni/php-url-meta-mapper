@@ -1,6 +1,6 @@
 <?php
 
-namespace Tigmium\PhpUrlMetaMapper;
+namespace TKuni\PhpUrlMetaMapper;
 
 class Template
 {

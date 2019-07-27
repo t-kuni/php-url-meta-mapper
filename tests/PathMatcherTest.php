@@ -1,5 +1,5 @@
 <?php
-namespace Tigmium\PhpUrlMetaMapper;
+namespace TKuni\PhpUrlMetaMapper;
 
 use PHPUnit\Framework\TestCase;
 
