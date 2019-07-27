@@ -7,23 +7,23 @@ URL based meta data mapper.
 ### Routing
 
 ```php
-$mapper = new Mapper();
-$mapper->map(['/foo', '/bar'])->provide([
-    'title' => 'foo bar page',
-]);
-$mapper->map(['/hoge', '/fuga'])->provide([
-    'title' => 'hoge fuga page',
-]);
+$mapper = (new Mapper())
+    ->map(['/foo', '/bar'])->provide([
+        'title' => 'foo bar page',
+    ]);
+    ->map(['/hoge', '/fuga'])->provide([
+        'title' => 'hoge fuga page',
+    ]);
+
 $meta = $mapper->resolve('https://example.com/foo');
-/*
- * $meta is ...
- * [
- *   'title' => 'hoge fuga page'
- * ]
- */
+
+var_dump($meta);
+// [
+//   'title' => 'hoge fuga page'
+// ]
 ```
 
-### Route parameters, Query Strings (TBD)
+### Route parameters, Query Strings
 
 ```php
 $mapper = new MetaMapper();

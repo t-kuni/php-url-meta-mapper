@@ -28,11 +28,14 @@ class Mapper {
 
     public function resolve($url) {
         $urlInfo = parse_url($url);
+        $query = [];
+        if (!empty($urlInfo['query']))
+            parse_str($urlInfo['query'], $query);
 
         foreach ($this->rules as $rule) {
             if (($resolved = $rule->resolve($urlInfo['path'])) !== null) {
                 if (is_object($resolved->template) && $resolved->template instanceof Closure) {
-                    return $resolved->template->call($this, $resolved->route);
+                    return $resolved->template->call($this, $resolved->route, $query);
                 } else {
                     return $resolved->template;
                 }
