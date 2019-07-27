@@ -7,12 +7,20 @@ class Path
      */
     private $path;
 
+    /**
+     * @var string
+     */
+    private $regexp;
+
+
     public function __construct(string $path)
     {
-        $this->path = $path;
+        $this->path   = $path;
+        $this->regexp = (new PathParser())->parse($path);
     }
 
-    public function match($path) {
-        return $this->path === $path;
+    public function match($path)
+    {
+        return preg_match($this->regexp, $path);
     }
 }

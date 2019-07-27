@@ -6,7 +6,7 @@ class MappingRule
      */
     private $paths;
     /**
-     * @var array
+     * @var array|Closure
      */
     private $template;
 
@@ -18,14 +18,19 @@ class MappingRule
         $this->template = null;
     }
 
-    public function setTemplate(array $template) {
+    /**
+     * @param array|Closure $template
+     */
+    public function setTemplate($template) {
         $this->template = $template;
     }
 
     public function resolve(string $path) {
         foreach ($this->paths as $rulePath) {
-            if ($rulePath->match($path))
-                return $this->template;
+            if ($rulePath->match($path)) {
+                $route = [];
+                return new Resolved($this->template, $route);
+            }
         }
 
         return null;

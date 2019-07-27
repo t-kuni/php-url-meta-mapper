@@ -17,7 +17,11 @@ class Mapper {
         return $this;
     }
 
-    public function provide(array $template) {
+    /**
+     * @param array|Closure $template
+     * @return $this
+     */
+    public function provide($template) {
         $this->currentRule->setTemplate($template);
         return $this;
     }
@@ -26,8 +30,12 @@ class Mapper {
         $urlInfo = parse_url($url);
 
         foreach ($this->rules as $rule) {
-            if (($template = $rule->resolve($urlInfo['path'])) !== null) {
-                return $template;
+            if (($resolved = $rule->resolve($urlInfo['path'])) !== null) {
+                if (is_object($resolved->template) && $resolved->template instanceof Closure) {
+                    return $resolved->template->call($this, $resolved->route);
+                } else {
+                    return $resolved->template;
+                }
             }
         }
 

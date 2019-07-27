@@ -26,7 +26,8 @@ final class MapperTest extends TestCase
                 return [
                     'title' => "Routed One",
                 ];
-            } else {
+            }
+            if ($route['id'] == 2) {
                 return [
                     'title' => "Routed Two",
                 ];
