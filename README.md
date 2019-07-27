@@ -1,6 +1,7 @@
 # Meta Mapper (TBD)
 
-URL based meta data mapper.
+URL based meta data mapper.  
+provide fluent interface.
 
 ## Features
 
@@ -41,23 +42,7 @@ $mapper->map('/foo/{id}')->provide(function($route, $query) {
 $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 ```
 
-* Regular Expression Constraints
-
-### Binding Data (TBD)
-
-```php
-$mapper = (new Mapper())
-    ->map('/foo/{id}')->pre(function ($route, $query, $binding) {
-        $binding['fizz'] = 'bazz';
-        return compact('route', 'query', 'binding');
-    })->provide(function ($route, $query) {
-        return [
-            'title' => '{{fizz}}',
-        ];
-    });
-
-$meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
-```
+* Regular Expression Constraints (TBD)
 
 ### Hooks
 
@@ -90,6 +75,22 @@ $actual = $m->resolve('https://example.com/foo/2');
 ```
 
 #### Post Hook (TBD)
+
+### Templating
+
+```php
+$mapper = (new Mapper())
+    ->map('/foo/{id}')->pre(function ($route, $query, $binding) {
+        $binding['fizz'] = 'bazz';
+        return compact('route', 'query', 'binding');
+    })->provide(function ($route, $query) {
+        return [
+            'title' => '{{fizz}}',
+        ];
+    });
+
+$meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
+```
 
 ### Aliases
 

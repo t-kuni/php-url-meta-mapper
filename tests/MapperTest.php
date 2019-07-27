@@ -101,14 +101,17 @@ final class MapperTest extends TestCase
         $m = (new Mapper())
             ->map('/foo/{id}')->pre(function ($route, $query, $binding) {
                 $binding['fizz'] = 'bazz';
+                $binding['foo'] = 'bar';
                 return compact('route', 'query', 'binding');
             })->provide([
                 'title' => '{{fizz}}',
+                'keyword' => 'aaa,{{foo}},ccc'
             ]);
 
         $actual = $m->resolve('https://example.com/foo/2?hoge=fuga');
         $expect = [
-            'title' => 'Routed Fizz',
+            'title' => 'bazz',
+            'keyword' => 'aaa,bar,ccc',
         ];
 
         $this->assertEquals($expect, $actual);
