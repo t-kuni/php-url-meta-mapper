@@ -1,4 +1,4 @@
-# Meta Mapper (TBD)
+# Meta Mapper
 
 URL based meta data mapper.  
 provide fluent interface.
@@ -46,7 +46,9 @@ $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 
 ### Hooks
 
-#### Global Hook (TBD)
+#### Global Hook 
+
+(TBD)
 
 ```php
 $mapper->global()->pre(function($route, $query, $binding) {
@@ -74,7 +76,9 @@ $actual = $m->resolve('https://example.com/foo/2');
 // ]
 ```
 
-#### Post Hook (TBD)
+#### Post Hook 
+
+(TBD)
 
 ### Templating
 
@@ -94,9 +98,13 @@ $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 
 ### Aliases
 
-### Generate Admin Page (TBD)
+### Generate Admin Page 
 
-### Reuse Template (TBD)
+(TBD)
+
+### Reuse Template 
+
+(TBD)
 
 ```php
 $mapper = new Mapper();
@@ -107,7 +115,9 @@ $mapper->map('/bar')->provide(M::template('temp-name'));
 $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 ```
 
-### define templates (TBD)
+### define templates 
+
+(TBD)
 
 ```php
 $templates = [
