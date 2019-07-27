@@ -1,13 +1,16 @@
 {
-    "name": "tigmium/meta-mapper",
+    "name": "tigmium/php-url-meta-mapper",
+    "description": "URL based Meta data mapper.",
     "type": "library",
-    "psr-4": { "MetaMapper\\": "src/" },
+    "psr-4": { "UrlMetaMapper\\": "src/" },
     "autoload": {
         "classmap": [
             "src/"
         ]
     },
-    "require": {},
+    "require": {
+        "php": "^7.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^8"
     }
