@@ -1,0 +1,13 @@
+@startuml
+Main -> Mapper: map()
+Mapper -> MappingRule: new
+MappingRule -> Path: new
+Path -> PathMatcher: new
+PathMatcher -> PathMatcher: parse
+Main -> Mapper: provide()
+Mapper -> MappingRule: setTemplate()
+Main -> Mapper: resolve()
+Mapper -> MappingRule: resolve()
+MappingRule -> Path: match()
+Path -> PathMatcher: match()
+@enduml
