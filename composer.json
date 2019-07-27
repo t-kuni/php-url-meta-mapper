@@ -3,7 +3,7 @@
     "description": "URL based Meta data mapper.",
     "version": "0.0.1",
     "type": "library",
-    "psr-4": { "UrlMetaMapper\\": "src/" },
+    "psr-4": { "Tigmium\\PhpUrlMetaMapper\\": "src/" },
     "autoload": {
         "classmap": [
             "src/"

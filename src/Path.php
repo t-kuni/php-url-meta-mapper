@@ -1,5 +1,7 @@
 <?php
 
+namespace Tigmium\PhpUrlMetaMapper;
+
 class Path
 {
     /**

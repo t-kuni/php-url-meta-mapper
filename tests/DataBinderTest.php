@@ -1,4 +1,6 @@
 <?php
+namespace Tigmium\PhpUrlMetaMapper;
+
 use PHPUnit\Framework\TestCase;
 
 class DataBinderTest extends TestCase

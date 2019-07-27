@@ -1,5 +1,6 @@
 <?php
 
+namespace Tigmium\PhpUrlMetaMapper;
 
 class Resolved
 {

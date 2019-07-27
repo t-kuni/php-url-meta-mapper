@@ -1,4 +1,9 @@
 <?php
+
+namespace Tigmium\PhpUrlMetaMapper;
+
+use Closure;
+
 class MappingRule
 {
     /**
