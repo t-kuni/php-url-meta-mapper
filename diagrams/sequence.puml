@@ -10,4 +10,7 @@ Main -> Mapper: resolve()
 Mapper -> MappingRule: resolve()
 MappingRule -> Path: match()
 Path -> PathMatcher: match()
+MappingRule -> Resolved: new
+MappingRule -> Mapper: return Resolved
+Mapper -> template: call()
 @enduml

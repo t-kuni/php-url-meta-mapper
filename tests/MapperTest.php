@@ -1,11 +1,12 @@
 <?php
+
 use PHPUnit\Framework\TestCase;
 
 final class MapperTest extends TestCase
 {
     public function testCanResolveByPath(): void
     {
-        $m = (new Mapper())
+        $m      = (new Mapper())
             ->map(['/foo', '/bar'])->provide([
                 'title' => 'foo bar page',
             ])
@@ -24,7 +25,7 @@ final class MapperTest extends TestCase
     public function testCanResolveByPathWithRouteParameters(): void
     {
         $m = new Mapper();
-        $m->map(['/foo/{id}', '/bar/{id}'])->provide(function($route) {
+        $m->map(['/foo/{id}', '/bar/{id}'])->provide(function ($route) {
             if ($route['id'] == 1) {
                 return [
                     'title' => "Routed One",
@@ -48,7 +49,7 @@ final class MapperTest extends TestCase
     public function testCanResolveQueryStrings(): void
     {
         $m = new Mapper();
-        $m->map(['/foo/{id}', '/bar/{id}'])->provide(function($route, $query) {
+        $m->map(['/foo/{id}', '/bar/{id}'])->provide(function ($route, $query) {
             if ($query['hoge'] == 'ignore') {
                 return [
                     'title' => "Routed Hoge",
@@ -67,5 +68,49 @@ final class MapperTest extends TestCase
         ];
 
         $this->assertEquals($expect, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function canAddPreHook()
+    {
+        $m = (new Mapper())
+            ->map('/foo/{id}')->pre(function ($route, $query, $binding) {
+                $route['id'] = 100;
+                return compact('route', 'query', 'binding');
+            })->provide(function($route, $query) {
+                return [
+                    'title' => 'id is ' . $route['id'],
+                ];
+            });
+
+        $actual = $m->resolve('https://example.com/foo/2?hoge=fuga');
+        $expect = [
+            'title' => 'id is 100',
+        ];
+
+        $this->assertEquals($expect, $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function canBindData()
+    {
+        $m = (new Mapper())
+            ->map('/foo/{id}')->pre(function ($route, $query, $binding) {
+                $binding['fizz'] = 'bazz';
+                return compact('route', 'query', 'binding');
+            })->provide([
+                'title' => '{{fizz}}',
+            ]);
+
+        $actual = $m->resolve('https://example.com/foo/2?hoge=fuga');
+        $expect = [
+            'title' => 'Routed Fizz',
+        ];
+
+        $this->assertEquals($expect, $actual);
     }
 }

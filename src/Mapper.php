@@ -12,8 +12,18 @@ class Mapper {
     private $currentRule = null;
 
     public function map($paths) {
+        if (!is_array($paths)) {
+            $paths = [$paths];
+        }
+
         array_push($this->rules, new MappingRule($paths));
         $this->currentRule = &$this->rules[count($this->rules) - 1];
+        return $this;
+    }
+
+    public function pre(Closure $hook)
+    {
+        $this->currentRule->setPreHook($hook);
         return $this;
     }
 
@@ -34,11 +44,23 @@ class Mapper {
 
         foreach ($this->rules as $rule) {
             if (($resolved = $rule->resolve($urlInfo['path'])) !== null) {
-                if (is_object($resolved->template) && $resolved->template instanceof Closure) {
-                    return $resolved->template->call($this, $resolved->route, $query);
-                } else {
-                    return $resolved->template;
+                $route = $resolved->route;
+                $binding = [];
+
+                if ($resolved->preHook !== null) {
+                    $ret = $resolved->preHook->call($this, $route, $query, $binding);
+                    $route = $ret['route'];
+                    $query = $ret['query'];
+                    $binding = $ret['binding'];
                 }
+
+                $tmpl = null;
+                if (is_object($resolved->template) && $resolved->template instanceof Closure) {
+                    $tmpl = $resolved->template->call($this, $route, $query);
+                } else {
+                    $tmpl = $resolved->template;
+                }
+                return (new Template($tmpl))->bind($binding);
             }
         }
 

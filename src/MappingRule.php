@@ -8,14 +8,17 @@ class MappingRule
     /**
      * @var array|Closure
      */
-    private $template;
+    private $template = null;
+    /**
+     * @var Closure
+     */
+    private $preHook = null;
 
     public function __construct(array $paths)
     {
         $this->paths = array_map(function($path) {
             return new Path($path);
         }, $paths);
-        $this->template = null;
     }
 
     /**
@@ -25,10 +28,14 @@ class MappingRule
         $this->template = $template;
     }
 
+    public function setPreHook(Closure $hook) {
+        $this->preHook = $hook;
+    }
+
     public function resolve(string $path) {
         foreach ($this->paths as $rulePath) {
             if (($route = $rulePath->match($path)) !== null) {
-                return new Resolved($this->template, $route);
+                return new Resolved($this->template, $route, $this->preHook);
             }
         }
 

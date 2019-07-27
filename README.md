@@ -26,8 +26,8 @@ var_dump($meta);
 ### Route parameters, Query Strings
 
 ```php
-$mapper = new MetaMapper();
-$mapper->map('/foo/{id}')->provide(funciton($route, $query) {
+$mapper = new Mapper();
+$mapper->map('/foo/{id}')->provide(function($route, $query) {
     if ($route['id'] == 1) {
         return [
             'title' => "Routed One", 
@@ -46,19 +46,22 @@ $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 ### Binding Data (TBD)
 
 ```php
-$mapper = new MetaMapper();
-$mapper->map('/foo/{id}')->pre(function($route, $query, $binding) {
-    $binding['fizz'] = 'bazz';
-    return compact('route', 'query', 'binding');
-})->provide(funciton($route, $query) {
-    return [
-        'title' => '{{fizz}}',
-    }
-});
+$mapper = (new Mapper())
+    ->map('/foo/{id}')->pre(function ($route, $query, $binding) {
+        $binding['fizz'] = 'bazz';
+        return compact('route', 'query', 'binding');
+    })->provide(function ($route, $query) {
+        return [
+            'title' => '{{fizz}}',
+        ];
+    });
+
 $meta = $mapper->resolve('https://example.com/foo/2?hoge=fuga');
 ```
 
-### Hooks (TBD)
+### Hooks
+
+#### Global Hook (TBD)
 
 ```php
 $mapper->global()->pre(function($route, $query, $binding) {
@@ -67,6 +70,27 @@ $mapper->global()->pre(function($route, $query, $binding) {
 });
 ```
 
+#### Pre Hook
+
+```php
+$m = (new Mapper())
+    ->map('/foo/{id}')->pre(function ($route, $query, $binding) {
+        $route['id'] = 100;
+        return compact('route', 'query', 'binding');
+    })->provide(function($route, $query) {
+        return [
+            'title' => 'id is ' . $route['id'],
+        ];
+    });
+
+$actual = $m->resolve('https://example.com/foo/2');
+// [
+//   'title' => 'id is 100'
+// ]
+```
+
+#### Post Hook (TBD)
+
 ### Aliases
 
 ### Generate Admin Page (TBD)
@@ -74,7 +98,7 @@ $mapper->global()->pre(function($route, $query, $binding) {
 ### Reuse Template (TBD)
 
 ```php
-$mapper = new MetaMapper();
+$mapper = new Mapper();
 $mapper->map('/foo')->provide(M::template([
     'title' => '{{fizz}}'
 ])->as('temp-name'));

@@ -1,0 +1,15 @@
+@startuml{Fig3.1.png}
+title 簡単なクラス図
+
+class Mapper
+class MappingRule
+class Path
+class PathMatcher
+class Resolved
+
+Mapper "1" o-- "*" MappingRule
+MappingRule "1" o-- "*" Path
+Path "1" *-- "1" PathMatcher
+MappingRule -- Resolved
+Mapper -- Resolved
+@enduml
