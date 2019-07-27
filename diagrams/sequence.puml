@@ -11,6 +11,9 @@ Mapper -> MappingRule: resolve()
 MappingRule -> Path: match()
 Path -> PathMatcher: match()
 MappingRule -> Resolved: new
-MappingRule -> Mapper: return Resolved
-Mapper -> template: call()
+MappingRule -> Mapper: Resolved
+Mapper -> Resolved: ->template->call()
+Mapper <- Resolved: route
+Mapper -> Template: new & bind()
+Template -> DataBinder: bind()
 @enduml
