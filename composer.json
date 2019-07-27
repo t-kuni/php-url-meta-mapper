@@ -1,6 +1,7 @@
 {
     "name": "tigmium/php-url-meta-mapper",
     "description": "URL based Meta data mapper.",
+    "version": "0.0.1",
     "type": "library",
     "psr-4": { "UrlMetaMapper\\": "src/" },
     "autoload": {
