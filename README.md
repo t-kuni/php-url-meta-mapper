@@ -3,7 +3,11 @@
 This library is URL based Meta tag(eg SEO text, OGP, etc...) mapper.  
 Purpose of this is to collect various places Meta tag settings into one place.  
 This is useful in web page like to often occur modification of Meta tag.  
-You can define mapping simply between URL and Meta tag through the fluent interface.  
+You can define mapping simply between URL and Meta tag through the fluent interface. 
+
+## Instration
+
+(TODO) 
 
 ## Features
 
